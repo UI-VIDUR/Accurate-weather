@@ -157,7 +157,7 @@ function App() {
                     </div>
                   </div>
                   <div className="md:col-span-12 lg:col-span-4">
-                    <div className="bg-blue-50/55 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 h-full max-h-[614px] overflow-y-auto transparent-scroll">
+                    <div className="bg-blue-50/55 rounded-xl p-4 md:p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 h-full max-h-[614px] overflow-y-auto transparent-scroll">
                       <h4 className="text-slate-500 font-bold text-lg mb-5 uppercase">10 Days Forecast</h4>
                       {loading ? (
                         "Fetching 10 days forecast"
