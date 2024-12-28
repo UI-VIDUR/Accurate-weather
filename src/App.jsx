@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import logo from '../src/assets/weather-logo.png'
 import Search from "./components/Search";
 import TempToggle from "./components/TempToggle";
 import CurrentTemp from "./components/CurrentTemp";
@@ -17,6 +18,7 @@ function App() {
 
   let astro = {} 
   let day = {}
+  let hour = {}
   let forecastDetails = {}
   let forecastDays = []
   let sunrise = '';
@@ -28,36 +30,11 @@ function App() {
   let wind_kph = '';
   let vis_km = '';
 
-  const fetchWeather = async (region) => {
-    try {
-      const response = await axios.get(
-        `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${region}&days=10&aqi=${aqi}`
-      );
-      setWeather(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const getLocation = async () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        fetchWeather(`${latitude},${longitude}`);
-      });
-    }
-  };
-
-  useEffect(() => {
-    getLocation();
-  }, []);
-
   if(!loading){
 
     forecastDays = weather?.forecast?.forecastday || {}
     forecastDetails = forecastDays.map((forecast) => {
-      return { astro = {}, day = {} } = forecast;
+      return { astro = {}, day = {}, hour= {} } = forecast;
     });
 
     sunrise = forecastDetails?.[0].astro.sunrise
@@ -70,6 +47,31 @@ function App() {
     vis_km = `${weather.current.vis_km} km`
   }
 
+  const fetchWeather = async (region) => {
+    try {
+      const response = await axios.get(
+        `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${region}&days=10&aqi=${aqi}`
+      );
+      setWeather(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        fetchWeather(`${latitude},${longitude}`);
+      });
+    }
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
   return (
     <>
       <div className="container">
@@ -81,7 +83,7 @@ function App() {
                 className="flex items-center gap-1 text-gray-900 text-lg"
               >
                 <img
-                  src="../src/assets/weather-logo.png"
+                  src={logo}
                   alt="logo"
                   className="w-24 h-24 object-contain"
                 />
@@ -113,14 +115,14 @@ function App() {
                 
                 <div className="grid grid-cols-12 gap-10 mt-12">
                   <div className="col-span-8 grid grid-cols-8 gap-10">
-                    <div className="bg-blue-50 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 col-span-8">
+                    <div className="bg-blue-50/55 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 col-span-8">
                       <h4 className="text-slate-500 font-bold text-lg mb-5 uppercase">Today's Hourly Forecast</h4>
                       {loading ? (
                         "Fetching hourly forecasts"
                       ) : (
-                        <div className="flex flex-nowrap gap-4 overflow-x-auto pb-5 transparent-scroll px-1">
-                          {forecastDetails &&
-                            forecastDetails[0].hour.map((hour) => {
+                        <div className="flex flex-nowrap gap-4 overflow-x-auto py-2 transparent-scroll px-1">
+                          {hour &&
+                            hour.map((hour) => {
                               return (
                                 <HourlyForcastCard
                                   key={hour.time}
@@ -134,7 +136,7 @@ function App() {
                         </div>
                       )}
                     </div>
-                    <div className=" bg-blue-50 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 h-full col-span-8">
+                    <div className=" bg-blue-50/55 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 col-span-8">
                       <h4 className="text-slate-500 font-bold text-lg mb-5 uppercase">Weather details</h4>
                       {loading ? (
                         "Fetching weather details"
@@ -153,15 +155,14 @@ function App() {
                     </div>
                   </div>
                   <div className="col-span-4">
-                    <div className="bg-blue-50 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 h-full max-h-[614px] overflow-y-auto transparent-scroll">
+                    <div className="bg-blue-50/55 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 h-full max-h-[614px] overflow-y-auto transparent-scroll">
                       <h4 className="text-slate-500 font-bold text-lg mb-5 uppercase">10 Days Forecast</h4>
                       {loading ? (
                         "Fetching 10 days forecast"
                       ) : (
                         <ul className='space-y-3'>
                           {
-                            forecastDetails && forecastDetails.map((forecast, index) => {
-                              console.log(forecast);
+                            forecastDetails && forecastDetails.map((forecast) => {
                               return <DaysForecast key={forecast.date} forecast={forecast} />
                             })
                           }

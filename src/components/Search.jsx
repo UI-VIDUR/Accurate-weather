@@ -22,7 +22,7 @@ function Search({onSearch}) {
                     placeholder='Enter your city'
                     value={inputValue} 
                     onChange={(e) => setInputValue(e.target.value)} 
-                    className='bg-blue-50 border-none ring-2 ring-blue-100 rounded-md p-2 mr-2 w-full focus:border-none focus:outline-none focus:ring-2 focus:ring-blue-200 text-slate-400 font-medium placeholder:text-slate-400'
+                    className='bg-blue-50/55 border-none ring-2 ring-blue-100 rounded-md p-2 mr-2 w-full focus:border-none focus:outline-none focus:ring-2 focus:ring-blue-200 text-slate-400 font-medium placeholder:text-slate-400'
                 />
             </form>
         </div>

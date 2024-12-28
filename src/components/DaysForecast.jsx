@@ -2,7 +2,7 @@ import React from 'react'
 
 function DaysForecast({forecast}) {
 
-    console.log(forecast);
+    // console.log(forecast);
 
     let day = forecast?.day;
     let hour = forecast?.hour
