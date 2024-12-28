@@ -22,8 +22,8 @@ function CurrentTemp({location, current, forecast}) {
                     </div>
                 </div>
                 <h1 className="text-5xl font-bold flex items-center gap-5">
-                    <span className="text-slate-600">{current.temp_c}°</span>
-                    <span className="text-slate-400">{day.mintemp_c}°</span>
+                    <span className="text-slate-600">{current.temp_c}°C</span>
+                    <span className="text-slate-400">{day.mintemp_c}°C</span>
                 </h1>
             </div>
         </>
