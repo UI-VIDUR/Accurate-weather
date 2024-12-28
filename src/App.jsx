@@ -75,29 +75,31 @@ function App() {
   return (
     <>
       <div className="container">
-        <div className="grid gap-12 grid-cols-12">
-          <header className="col-span-12">
-            <nav className="flex items-center flex-wrap gap-12 bg-white py-6">
+        <div className="grid gap-10 grid-cols-1 md:grid-cols-12">
+          <header className="md:col-span-12">
+            <nav className="flex flex-col md:flex-row items-center flex-wrap gap-12 bg-white py-6">
               <a
                 href=""
-                className="flex items-center gap-1 text-gray-900 text-lg"
+                className="flex justify-center items-center gap-1 text-gray-900 text-lg"
               >
                 <img
                   src={logo}
                   alt="logo"
-                  className="w-24 h-24 object-contain"
+                  className="w-12 h-12 md:w-24 md:h-24 object-contain"
                 />
                 <strong className="text-lg text-slate-600">Accurate Weather</strong>
               </a>
-              <Search
-                region={region}
-                setRegion={setRegion}
-                onSearch={fetchWeather}
-              />
-              <TempToggle />
+              <div className="flex-1 flex items-center gap-12 w-full">
+                <Search
+                  region={region}
+                  setRegion={setRegion}
+                  onSearch={fetchWeather}
+                />
+                <TempToggle />
+              </div>
             </nav>
           </header>
-          <main className="col-span-12 pb-12">
+          <main className="md:col-span-12 pb-12">
             {weather && (
               <>
                 <div className="bg-white">
@@ -113,9 +115,9 @@ function App() {
                 </div>
 
                 
-                <div className="grid grid-cols-12 gap-10 mt-12">
-                  <div className="col-span-8 grid grid-cols-8 gap-10">
-                    <div className="bg-blue-50/55 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 col-span-8">
+                <div className="grid md:grid-cols-12 gap-10 mt-12">
+                  <div className="md:col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-8 gap-10">
+                    <div className="bg-blue-50/55 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 md:col-span-12 lg:col-span-8">
                       <h4 className="text-slate-500 font-bold text-lg mb-5 uppercase">Today's Hourly Forecast</h4>
                       {loading ? (
                         "Fetching hourly forecasts"
@@ -136,12 +138,12 @@ function App() {
                         </div>
                       )}
                     </div>
-                    <div className=" bg-blue-50/55 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 col-span-8">
+                    <div className=" bg-blue-50/55 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 md:col-span-12 lg:col-span-8">
                       <h4 className="text-slate-500 font-bold text-lg mb-5 uppercase">Weather details</h4>
                       {loading ? (
                         "Fetching weather details"
                       ) : (
-                        <div className="grid grid-cols-4 gap-x-4 gap-y-6">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6">
                           <WeatherDetailsCard detailsTitle={"sunrise"} details={sunrise} /> 
                           <WeatherDetailsCard detailsTitle={"sunset"} details={sunset} /> 
                           <WeatherDetailsCard detailsTitle={"chance of rain"} details={daily_chance_of_rain} /> 
@@ -154,7 +156,7 @@ function App() {
                       )}
                     </div>
                   </div>
-                  <div className="col-span-4">
+                  <div className="md:col-span-12 lg:col-span-4">
                     <div className="bg-blue-50/55 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 h-full max-h-[614px] overflow-y-auto transparent-scroll">
                       <h4 className="text-slate-500 font-bold text-lg mb-5 uppercase">10 Days Forecast</h4>
                       {loading ? (
