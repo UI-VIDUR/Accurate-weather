@@ -117,7 +117,7 @@ function App() {
                 
                 <div className="grid md:grid-cols-12 gap-10 mt-12">
                   <div className="md:col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-8 gap-10">
-                    <div className="bg-blue-50/55 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 md:col-span-12 lg:col-span-8">
+                    <div className="bg-blue-50/55 rounded-xl p-3 md:p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 md:col-span-12 lg:col-span-8">
                       <h4 className="text-slate-500 font-bold text-lg mb-5 uppercase">Today's Hourly Forecast</h4>
                       {loading ? (
                         "Fetching hourly forecasts"
@@ -138,7 +138,7 @@ function App() {
                         </div>
                       )}
                     </div>
-                    <div className=" bg-blue-50/55 rounded-xl p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 md:col-span-12 lg:col-span-8">
+                    <div className=" bg-blue-50/55 rounded-xl p-3 md:p-5 ring-blue-100 ring-2 shadow-md shadow-blue-50 md:col-span-12 lg:col-span-8">
                       <h4 className="text-slate-500 font-bold text-lg mb-5 uppercase">Weather details</h4>
                       {loading ? (
                         "Fetching weather details"
