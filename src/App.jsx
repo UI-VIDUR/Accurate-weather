@@ -95,7 +95,7 @@ function App() {
                   setRegion={setRegion}
                   onSearch={fetchWeather}
                 />
-                <TempToggle />
+                {/* <TempToggle /> */}
               </div>
             </nav>
           </header>
